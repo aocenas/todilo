@@ -1,6 +1,7 @@
-let React = require('react');
+const React = require('react');
+const TodiloApp = require('./TodiloApp');
 
 React.render(
-    <h1>Whats up dog!</h1>,
+    <TodiloApp/>,
     document.getElementById('content')
 );
