@@ -1,5 +1,7 @@
 const React = require('react');
+const Todo = require('./Todo');
 const TodoList = require('./TodoList.jsx');
+
 
 module.exports = React.createClass({
     displayName: 'TodiloApp',
@@ -8,10 +10,10 @@ module.exports = React.createClass({
     getInitialState () {
         return {
             todos: [
-                'Discuss report with John',
-                'Get a haircut',
-                'Pay electricity bill',
-                'Check gym hours',
+                new Todo('Discuss report with John'),
+                new Todo('Get a haircut'),
+                new Todo('Pay electricity bill'),
+                new Todo('Check gym hours'),
             ]
         };
     },
