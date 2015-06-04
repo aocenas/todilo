@@ -15,6 +15,13 @@ module.exports = React.createClass({
                         Add Todo
                     </button>
                 </form>
+                <ul>
+                    <li></li>
+                </ul>
+                <footer>
+                    <div className='items-left'>items left</div>
+                    <button>Mark all as complete</button>
+                </footer>
             </div>
         );
     }

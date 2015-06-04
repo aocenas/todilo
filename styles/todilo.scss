@@ -20,7 +20,7 @@ body {
     }
 
     form {
-        padding: 20px 18px;
+        padding: 20px;
         font-size: 14px;
         display: flex;
 
@@ -39,6 +39,35 @@ body {
             padding: 8px 0;
             color: #565656;
             background-image: linear-gradient(to bottom, white, #e6e5e4 1px, #e6e5e4 50%, #cecdcb 50%, #cecdcb);
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        min-height: 270px;
+    }
+
+    footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        border-top: 1px dashed #c7c5c5;
+
+        .items-left {
+            color: #878787;
+        }
+
+        button {
+            $color: #427bbc;
+            border: none;
+            background-color: transparent;
+            color: $color;
+            &:hover {
+                color: darken($color, 10%);
+            }
         }
     }
 }
