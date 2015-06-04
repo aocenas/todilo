@@ -47,6 +47,22 @@ body {
         padding: 0;
         list-style: none;
         min-height: 270px;
+
+        li {
+            padding: 20px;
+            &.odd {
+                background-color: #F2F5F8;
+            }
+
+            &.completed {
+                text-decoration: line-through;
+                color: #878787;
+            }
+
+            input {
+                margin-right: 8px;
+            }
+        }
     }
 
     footer {

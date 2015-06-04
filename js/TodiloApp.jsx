@@ -11,8 +11,8 @@ module.exports = React.createClass({
         return {
             todos: [
                 new Todo('Discuss report with John'),
-                new Todo('Get a haircut'),
-                new Todo('Pay electricity bill'),
+                new Todo('Get a haircut', true),
+                new Todo('Pay electricity bill', true),
                 new Todo('Check gym hours'),
             ]
         };

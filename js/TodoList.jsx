@@ -1,4 +1,6 @@
+const cx = require('classnames');
 const React = require('react');
+
 const Todo = require('./Todo');
 
 const Types = React.PropTypes;
@@ -10,11 +12,27 @@ module.exports = React.createClass({
     },
 
     render () {
+        let list = this.props.todos.map((todo, index) => {
+            return (
+                <li
+                    key={index}
+                    className={cx({
+                        odd: (index + 1) % 2,
+                        completed: todo.completed
+                    })}
+                >
+                    <input
+                        type='checkbox'
+                        checked={todo.completed}
+                    />
+                    {todo.text}
+                </li>
+            );
+        });
+
         return (
             <ul>
-                {this.props.todos.map((todo, index) =>
-                    <li key={index}>{todo.text}</li>
-                )}
+                {list}
             </ul>
         );
     }
