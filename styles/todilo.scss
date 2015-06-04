@@ -21,10 +21,24 @@ body {
 
     form {
         padding: 20px 18px;
+        font-size: 14px;
+        display: flex;
 
         input {
+            flex: 1;
             border-radius: 4px;
             border: 1px solid #a8a7a7;
+            padding: 8px;
+            margin-right: 8px;
+        }
+
+        button {
+            width: 142px;
+            border-radius: 4px;
+            border: 1px solid #878787;
+            padding: 8px 0;
+            color: #565656;
+            background-image: linear-gradient(to bottom, white, #e6e5e4 1px, #e6e5e4 50%, #cecdcb 50%, #cecdcb);
         }
     }
 }

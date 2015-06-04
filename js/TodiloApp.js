@@ -7,8 +7,13 @@ module.exports = React.createClass({
             <div className='todilo-app'>
                 <h1>Todos</h1>
                 <form>
-                    <input type='text'/>
-                    <button type='submit'>Add Todo</button>
+                    <input
+                        placeholder='What needs to be done'
+                        type='text'
+                    />
+                    <button type='submit'>
+                        Add Todo
+                    </button>
                 </form>
             </div>
         );
