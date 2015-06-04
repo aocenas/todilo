@@ -1,7 +1,22 @@
 const React = require('react');
+const TodoList = require('./TodoList');
 
 module.exports = React.createClass({
     displayName: 'TodiloApp',
+
+
+    getInitialState () {
+        return {
+            todos: [
+                'Discuss report with John',
+                'Get a haircut',
+                'Pay electricity bill',
+                'Check gym hours',
+            ]
+        };
+    },
+
+
     render () {
         return (
             <div className='todilo-app'>
@@ -15,9 +30,12 @@ module.exports = React.createClass({
                         Add Todo
                     </button>
                 </form>
-                <ul>
-                    <li></li>
-                </ul>
+                {this.state.todos.length ?
+                    <TodoList todos={this.state.todos}/> :
+                    <div>
+                        You sure there is nothing you have to do?
+                    </div>
+                }
                 <footer>
                     <div className='items-left'>items left</div>
                     <button>Mark all as complete</button>
