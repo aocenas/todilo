@@ -1,5 +1,5 @@
 const React = require('react');
-const TodoList = require('./TodoList');
+const TodoList = require('./TodoList.jsx');
 
 module.exports = React.createClass({
     displayName: 'TodiloApp',
