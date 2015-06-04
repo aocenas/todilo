@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "js-build": "./node_modules/.bin/browserify js/app.js -t babelify -o static/js/app.js --debug",
-    "js-watch": "./node_modules/.bin/watchify js/app.js -t babelify -o static/js/app.js --debug"
+    "js-watch": "./node_modules/.bin/watchify js/app.js -t babelify -o static/js/app.js --debug",
+    "css-watch": "sass --watch styles/todilo.scss:static/css/todilo.css"
   },
   "author": "andrej ocenas",
   "license": "MIT",
