@@ -52,7 +52,11 @@ module.exports = React.createClass({
                             'all completed, yay!'
                         }
                     </div>
-                    <button>Mark all as complete</button>
+                    {uncompletedCount ?
+                        <button onClick={this.markAllCompleted}>
+                            Mark all as completed
+                        </button> : null
+                    }
                 </footer>
             </div>
         );
@@ -63,6 +67,12 @@ module.exports = React.createClass({
         let newTodo = todo.completed ? todo.uncomplete() : todo.complete();
         let newTodos = _.clone(this.state.todos);
         newTodos[index] = newTodo;
+        this.setState({todos: newTodos});
+    },
+
+
+    markAllCompleted () {
+        let newTodos = this.state.todos.map(todo => todo.complete());
         this.setState({todos: newTodos});
     }
 });
