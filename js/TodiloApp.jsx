@@ -21,6 +21,8 @@ module.exports = React.createClass({
 
 
     render () {
+        let uncompletedCount =
+            this.state.todos.filter(todo => !todo.completed).length;
         return (
             <div className='todilo-app'>
                 <h1>Todos</h1>
@@ -44,7 +46,12 @@ module.exports = React.createClass({
                     </div>
                 }
                 <footer>
-                    <div className='items-left'>items left</div>
+                    <div className='items-left'>
+                        {uncompletedCount ?
+                            uncompletedCount + ' items left' :
+                            'all completed, yay!'
+                        }
+                    </div>
                     <button>Mark all as complete</button>
                 </footer>
             </div>
