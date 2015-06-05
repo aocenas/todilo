@@ -95,11 +95,13 @@ module.exports = React.createClass({
         // using form and button type submit, se we need to prevent default
         // submit behavior
         event.preventDefault();
-        let newTodos = _.clone(this.state.todos);
-        newTodos.push(Todo(this.state.newTodoText));
-        this.setState({
-            todos: newTodos,
-            newTodoText: null
-        });
+        if (this.state.newTodoText) {
+            let newTodos = _.clone(this.state.todos);
+            newTodos.push(Todo(this.state.newTodoText));
+            this.setState({
+                todos: newTodos,
+                newTodoText: null
+            });
+        }
     }
 });
