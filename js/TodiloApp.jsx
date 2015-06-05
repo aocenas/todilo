@@ -63,6 +63,13 @@ module.exports = React.createClass({
     },
 
 
+    /**
+     * Goes as param to TodoList, only change is completed <-> uncompleted
+     * toggle.
+     *
+     * @arg {Todo} todo
+     * @arg {number} index - index of the todo in the list
+     */
     onTodoChange (todo, index) {
         let newTodo = todo.completed ? todo.uncomplete() : todo.complete();
         let newTodos = _.clone(this.state.todos);

@@ -38,6 +38,7 @@ body {
             border: 1px solid #878787;
             padding: 8px 0;
             color: #565656;
+            /*1px white on top, top half lighter grey, bottom half darker gray*/
             background-image: linear-gradient(to bottom, white, #e6e5e4 1px, #e6e5e4 50%, #cecdcb 50%, #cecdcb);
         }
     }
@@ -79,6 +80,8 @@ body {
         button {
             $color: #427bbc;
 
+            /* button dissapears if there is nothing to mark,
+               pading makes footer resize */
             padding: 0;
             border: none;
             background-color: transparent;

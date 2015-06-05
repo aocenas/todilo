@@ -6,6 +6,7 @@ function Todo(text, completed) {
     this.completed = !!completed;
 }
 
+// Immutable API
 Todo.prototype.complete = function () {
     return this.completed ? this : new Todo(this.text, true);
 };
