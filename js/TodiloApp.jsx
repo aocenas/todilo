@@ -1,7 +1,9 @@
 const _ = require('lodash');
 const React = require('react');
+const Request = require('request-promise');
 const Todo = require('./Todo');
 const TodoList = require('./TodoList.jsx');
+const {API_URL} = require('./constants');
 
 
 module.exports = React.createClass({
@@ -10,13 +12,14 @@ module.exports = React.createClass({
 
     getInitialState () {
         return {
-            todos: [
-                Todo('Discuss report with John'),
-                Todo('Get a haircut', true),
-                Todo('Pay electricity bill', true),
-                Todo('Check gym hours'),
-            ]
+            todos: []
         };
+    },
+
+
+    componentDidMount () {
+        Request(`${API_URL}/todos`)
+            .then(body => this.setState({todos: JSON.parse(body).todos}));
     },
 
 
