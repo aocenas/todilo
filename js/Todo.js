@@ -1,9 +1,14 @@
 const React = require('react');
 const Types = React.PropTypes;
 
-function Todo(text, completed) {
-    this.text = text;
-    this.completed = !!completed;
+function Todo(text, completed=false) {
+    if (this instanceof Todo) {
+        this.text = text;
+        this.completed = completed;
+    }
+    else {
+        return new Todo(text, completed);
+    }
 }
 
 // Immutable API
