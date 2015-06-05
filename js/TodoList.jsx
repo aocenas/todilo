@@ -8,7 +8,8 @@ const Types = React.PropTypes;
 module.exports = React.createClass({
     displayName: 'TodiloApp',
     propTypes: {
-        todos: Types.arrayOf(Todo.PropType).isRequired
+        todos: Types.arrayOf(Todo.PropType).isRequired,
+        onTodoChange: Types.func.isRequired
     },
 
     render () {
@@ -24,6 +25,7 @@ module.exports = React.createClass({
                     <input
                         type='checkbox'
                         checked={todo.completed}
+                        onChange={() => this.props.onTodoChange(todo, index)}
                     />
                     {todo.text}
                 </li>

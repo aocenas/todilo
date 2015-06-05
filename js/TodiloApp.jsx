@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const React = require('react');
 const Todo = require('./Todo');
 const TodoList = require('./TodoList.jsx');
@@ -33,7 +34,11 @@ module.exports = React.createClass({
                     </button>
                 </form>
                 {this.state.todos.length ?
-                    <TodoList todos={this.state.todos}/> :
+                    <TodoList
+                        todos={this.state.todos}
+                        onTodoChange={this.onTodoChange}
+                    /> :
+
                     <div>
                         You sure there is nothing you have to do?
                     </div>
@@ -44,5 +49,13 @@ module.exports = React.createClass({
                 </footer>
             </div>
         );
+    },
+
+
+    onTodoChange (todo, index) {
+        let newTodo = todo.completed ? todo.uncomplete() : todo.complete();
+        let newTodos = _.clone(this.state.todos);
+        newTodos[index] = newTodo;
+        this.setState({todos: newTodos});
     }
 });
