@@ -11,10 +11,10 @@ module.exports = React.createClass({
     getInitialState () {
         return {
             todos: [
-                new Todo('Discuss report with John'),
-                new Todo('Get a haircut', true),
-                new Todo('Pay electricity bill', true),
-                new Todo('Check gym hours'),
+                Todo('Discuss report with John'),
+                Todo('Get a haircut', true),
+                Todo('Pay electricity bill', true),
+                Todo('Check gym hours'),
             ]
         };
     },
@@ -29,9 +29,16 @@ module.exports = React.createClass({
                 <form>
                     <input
                         placeholder='What needs to be done'
+                        value={this.state.newTodoText}
+                        onChange={event => this.setState({
+                            newTodoText: event.target.value
+                        })}
                         type='text'
                     />
-                    <button type='submit'>
+                    <button
+                        type='submit'
+                        onClick={this.addTodo}
+                    >
                         Add Todo
                     </button>
                 </form>
@@ -81,5 +88,18 @@ module.exports = React.createClass({
     markAllCompleted () {
         let newTodos = this.state.todos.map(todo => todo.complete());
         this.setState({todos: newTodos});
+    },
+
+
+    addTodo (event) {
+        // using form and button type submit, se we need to prevent default
+        // submit behavior
+        event.preventDefault();
+        let newTodos = _.clone(this.state.todos);
+        newTodos.push(Todo(this.state.newTodoText));
+        this.setState({
+            todos: newTodos,
+            newTodoText: null
+        });
     }
 });
