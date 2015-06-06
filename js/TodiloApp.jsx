@@ -84,6 +84,7 @@ module.exports = React.createClass({
         let newTodos = _.clone(this.state.todos);
         newTodos[index] = newTodo;
         this.setState({todos: newTodos});
+        API.updateTodo(newTodo, index);
     },
 
 
