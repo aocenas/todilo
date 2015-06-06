@@ -38,5 +38,15 @@ class TodiloTestCase(unittest.TestCase):
         assert lastTodo['completed']
 
 
+    def test_mark_all(self):
+        todos = json.loads(self.app.get('/api/todos').data)['todos']
+        assert any([not todo['completed'] for todo in todos])
+
+        self.app.put('/api/todos/mark')
+
+        todos = json.loads(self.app.get('/api/todos').data)['todos']
+        assert all([todo['completed'] for todo in todos])
+
+
 if __name__ == '__main__':
     unittest.main()

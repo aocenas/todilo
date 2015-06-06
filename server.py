@@ -34,5 +34,11 @@ def update_todo(index):
     return jsonify(**todo)
 
 
+@app.route('/api/todos/mark', methods=['PUT'])
+def mark_all_completed():
+    for todo in todos: todo['completed'] = True
+    return jsonify(todos=todos)
+
+
 if __name__ == '__main__':
     app.run()
