@@ -6,7 +6,7 @@ const Todo = require('./Todo');
 const Types = React.PropTypes;
 
 module.exports = React.createClass({
-    displayName: 'TodiloApp',
+    displayName: 'TodiloList',
     propTypes: {
         todos: Types.arrayOf(Todo.PropType).isRequired,
         onTodoChange: Types.func.isRequired
