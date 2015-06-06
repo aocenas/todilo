@@ -91,6 +91,7 @@ module.exports = React.createClass({
     markAllCompleted () {
         let newTodos = this.state.todos.map(todo => todo.complete());
         this.setState({todos: newTodos});
+        API.markAllCompleted();
     },
 
 
