@@ -26,6 +26,13 @@ def add_todo():
     return jsonify(**request.json), 201
 
 
+@app.route('/api/todos/<int:index>', methods=['PUT'])
+def update_todo(index):
+    # TODO: index out of bounds maybe
+    todo = todos[index]
+    todo.update(request.json)
+    return jsonify(**todo)
+
 
 if __name__ == '__main__':
     app.run()

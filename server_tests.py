@@ -18,5 +18,25 @@ class TodiloTestCase(unittest.TestCase):
             lastTodo['text'] == 'test_add_todo' and \
             not lastTodo['completed']
 
+
+    def test_change_todo(self):
+        change = {'completed': True}
+        todos = json.loads(self.app.get('/api/todos').data)['todos']
+        lastIndex = len(todos) - 1
+        lastTodo = todos[lastIndex]
+        assert not lastTodo['completed']
+
+        self.app.put(
+            '/api/todos/{}'.format(lastIndex),
+            data=json.dumps(change),
+            content_type='application/json'
+        )
+
+        todos = json.loads(self.app.get('/api/todos').data)['todos']
+        lastTodo = todos[lastIndex]
+
+        assert lastTodo['completed']
+
+
 if __name__ == '__main__':
     unittest.main()
