@@ -48,6 +48,7 @@ module.exports = React.createClass({
                     <TodoList
                         todos={this.state.todos}
                         onTodoChange={this.onTodoChange}
+                        onTodoMove={this.onTodoMove}
                     /> :
 
                     <div>
@@ -111,6 +112,17 @@ module.exports = React.createClass({
             API.addTodo(newTodo).catch(() => {
                 // TODO: rollback
             });
+        }
+    },
+
+
+    onTodoMove (todo, index, newIndex) {
+        let {todos} = this.state;
+        if (0 <= newIndex && newIndex < todos.length) {
+            // shallow copy, without the todo we are moving
+            let newTodos = todos.slice(0, index).concat(todos.slice(index + 1));
+            newTodos.splice(newIndex, 0, todo);
+            this.setState({todos: newTodos});
         }
     }
 });

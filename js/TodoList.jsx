@@ -9,11 +9,17 @@ module.exports = React.createClass({
     displayName: 'TodiloList',
     propTypes: {
         todos: Types.arrayOf(Todo.PropType).isRequired,
-        onTodoChange: Types.func.isRequired
+        onTodoChange: Types.func.isRequired,
+        onTodoMove: Types.func.isRequired
     },
 
     render () {
+
         let list = this.props.todos.map((todo, index) => {
+
+            // creates onClick handler, only needs num of spaces to move
+            let move =
+                diff => () => this.props.onTodoMove(todo, index, index + diff);
             return (
                 <li
                     key={index}
@@ -27,7 +33,13 @@ module.exports = React.createClass({
                         checked={todo.completed}
                         onChange={() => this.props.onTodoChange(todo, index)}
                     />
-                    {todo.text}
+                    <div className='text'>{todo.text}</div>
+                    <button onClick={move(-1)}>
+                        up
+                    </button>
+                    <button onClick={move(+1)}>
+                        down
+                    </button>
                 </li>
             );
         });
@@ -38,4 +50,5 @@ module.exports = React.createClass({
             </ul>
         );
     }
+
 });

@@ -50,7 +50,10 @@ body {
         min-height: 270px;
 
         li {
+            display: flex;
             padding: 20px;
+            align-items: center;
+
             &.odd {
                 background-color: #F2F5F8;
             }
@@ -62,6 +65,10 @@ body {
 
             input {
                 margin-right: 8px;
+            }
+
+            .text {
+                flex: 1;
             }
         }
     }
