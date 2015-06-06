@@ -1,9 +1,8 @@
 const _ = require('lodash');
 const React = require('react');
-const Request = require('request-promise');
 const Todo = require('./Todo');
 const TodoList = require('./TodoList.jsx');
-const {API_URL} = require('./constants');
+const API = require('./API');
 
 
 module.exports = React.createClass({
@@ -18,8 +17,8 @@ module.exports = React.createClass({
 
 
     componentDidMount () {
-        Request(`${API_URL}/todos`)
-            .then(body => this.setState({todos: JSON.parse(body).todos}));
+        API.getAllTodos()
+            .then(todos => this.setState({todos: todos.map(Todo)}));
     },
 
 
@@ -100,10 +99,15 @@ module.exports = React.createClass({
         event.preventDefault();
         if (this.state.newTodoText) {
             let newTodos = _.clone(this.state.todos);
-            newTodos.push(Todo(this.state.newTodoText));
+            let newTodo = Todo({text: this.state.newTodoText});
+            newTodos.push(newTodo);
+            // optimistic update
             this.setState({
                 todos: newTodos,
                 newTodoText: null
+            });
+            API.addTodo(newTodo).catch(() => {
+                // TODO: rollback
             });
         }
     }
