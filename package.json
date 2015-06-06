@@ -15,6 +15,7 @@
     "classnames": "^2.1.2",
     "lodash": "^3.9.3",
     "react": "^0.13.3",
+    "react-dnd": "^1.1.2",
     "request-promise": "^0.4.2"
   },
   "devDependencies": {
