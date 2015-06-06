@@ -25,5 +25,11 @@ module.exports = {
 
     markAllCompleted () {
         return Request.put(`${API_URL}/todos/mark`);
+    },
+
+    moveTodo (index, newIndex) {
+        return Request
+            .put(`${API_URL}/todos/${index}/move`)
+            .json({newIndex});
     }
 };

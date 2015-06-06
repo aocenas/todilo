@@ -48,5 +48,19 @@ class TodiloTestCase(unittest.TestCase):
         assert all([todo['completed'] for todo in todos])
 
 
+    def test_move(self):
+        todos = json.loads(self.app.get('/api/todos').data)['todos']
+        from_index = len(todos) - 1
+        todo_to_move = todos[from_index]
+        self.app.put(
+            '/api/todos/{}/move'.format(from_index),
+            data=json.dumps({'newIndex': 0}),
+            content_type='application/json'
+        )
+
+        todos = json.loads(self.app.get('/api/todos').data)['todos']
+        assert todos[0]['text'] == todo_to_move['text']
+
+
 if __name__ == '__main__':
     unittest.main()

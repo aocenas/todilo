@@ -121,8 +121,10 @@ module.exports = React.createClass({
         if (0 <= newIndex && newIndex < todos.length) {
             // shallow copy, without the todo we are moving
             let newTodos = todos.slice(0, index).concat(todos.slice(index + 1));
+            // insert todo in correct place
             newTodos.splice(newIndex, 0, todo);
             this.setState({todos: newTodos});
+            API.moveTodo(index, newIndex);
         }
     }
 });

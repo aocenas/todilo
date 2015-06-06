@@ -40,5 +40,13 @@ def mark_all_completed():
     return jsonify(todos=todos)
 
 
+@app.route('/api/todos/<int:index>/move', methods=['PUT'])
+def move_todo(index):
+    todo = todos[index]
+    del todos[index]
+    todos.insert(request.json['newIndex'], todo)
+    return ('', 204)
+
+
 if __name__ == '__main__':
     app.run()
