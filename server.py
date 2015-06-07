@@ -4,10 +4,10 @@ app.debug = True
 
 # TODO: maybe use Redis or something more real life like
 todos = [
-    {'text': 'Discuss report with John', 'completed': False},
-    {'text': 'Get a haircut', 'completed': True},
-    {'text': 'Pay electricity bill', 'completed': True},
-    {'text': 'Check gym hours', 'completed': False},
+    {'text': 'Discuss report with John', 'completed': False, 'id': 0},
+    {'text': 'Get a haircut', 'completed': True, 'id': 1},
+    {'text': 'Pay electricity bill', 'completed': True, 'id': 2},
+    {'text': 'Check gym hours', 'completed': False, 'id': 3},
 ]
 
 @app.route('/')
@@ -22,6 +22,7 @@ def all_todos():
 
 @app.route('/api/todos', methods=['POST'])
 def add_todo():
+    request.json.update({'id': len(todos)})
     todos.append(request.json)
     return jsonify(**request.json), 201
 

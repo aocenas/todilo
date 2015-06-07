@@ -1,12 +1,14 @@
 const cx = require('classnames');
 const React = require('react');
+const { DragDropContext } = require('react-dnd');
+const HTML5Backend = require('react-dnd/modules/backends/HTML5');
 
 const Todo = require('./Todo');
 const TodoItem = require('./TodoItem.jsx');
 
 const Types = React.PropTypes;
 
-module.exports = React.createClass({
+let TodoList = React.createClass({
     displayName: 'TodoList',
     propTypes: {
         todos: Types.arrayOf(Todo.PropType).isRequired,
@@ -19,7 +21,7 @@ module.exports = React.createClass({
         let list = this.props.todos.map((todo, index) => {
             return (
                 <TodoItem
-                    key={index}
+                    key={todo.id}
                     className={cx({
                         odd: (index + 1) % 2
                     })}
@@ -39,3 +41,7 @@ module.exports = React.createClass({
     }
 
 });
+
+let dropContext = DragDropContext(HTML5Backend);
+module.exports = dropContext(TodoList);
+

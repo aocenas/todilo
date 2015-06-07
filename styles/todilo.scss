@@ -63,6 +63,16 @@ body {
                 color: #878787;
             }
 
+            &.is-dragging {
+                margin: 10px;
+                border: 2px dashed #ddd;
+
+                input, button, div {
+                    visibility: hidden;
+                }
+            }
+
+
             input {
                 margin-right: 8px;
             }

@@ -102,7 +102,10 @@ module.exports = React.createClass({
         event.preventDefault();
         if (this.state.newTodoText) {
             let newTodos = _.clone(this.state.todos);
-            let newTodo = Todo({text: this.state.newTodoText});
+            let newTodo = Todo({
+                text: this.state.newTodoText,
+                id: newTodos.length
+            });
             newTodos.push(newTodo);
             // optimistic update
             this.setState({
@@ -116,15 +119,16 @@ module.exports = React.createClass({
     },
 
 
-    onTodoMove (todo, index, newIndex) {
+    onTodoMove (todo, moveToTodo) {
         let {todos} = this.state;
-        if (0 <= newIndex && newIndex < todos.length) {
-            // shallow copy, without the todo we are moving
-            let newTodos = todos.slice(0, index).concat(todos.slice(index + 1));
-            // insert todo in correct place
-            newTodos.splice(newIndex, 0, todo);
-            this.setState({todos: newTodos});
-            API.moveTodo(index, newIndex);
-        }
+        let index = todos.indexOf(todo);
+        let moveToIndex = todos.indexOf(moveToTodo);
+
+        // shallow copy, without the todo we are moving
+        let newTodos = todos.slice(0, index).concat(todos.slice(index + 1));
+        // insert todo in correct place
+        newTodos.splice(moveToIndex, 0, todo);
+        this.setState({todos: newTodos});
+        API.moveTodo(index, moveToIndex);
     }
 });
