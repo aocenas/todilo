@@ -27,9 +27,6 @@ let TodoItem = React.createClass({
             connectDropTarget,
             isDragging} = this.props;
 
-        // creates onClick handler, only needs num of spaces to move
-        let move =
-            diff => () => this.props.onTodoMove(todo, index, index + diff);
         return connectDragSource(connectDropTarget(
             <li
                 className={cx(this.props.className, {
