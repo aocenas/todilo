@@ -77,7 +77,7 @@ body {
             /*before dragging ends and you are allways dropping the card on*/
             /*itself, which at the time seems like drop target.*/
             &.is-dragging {
-                margin: 10px;
+                margin: 8px;
                 padding: 10px;
                 border: 2px dashed #ddd;
 
