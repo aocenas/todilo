@@ -83,4 +83,7 @@ let dropTarget = DropTarget(
         connectDropTarget: connect.dropTarget(),
     })
 );
+
+// makes TodoItem both dropTarget and dragSource so that when user drops
+// one todo on another they reorder
 module.exports = dropTarget(dragSource(TodoItem));

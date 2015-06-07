@@ -70,6 +70,12 @@ body {
                 color: #878787;
             }
 
+            /*this is style of the card when dragging, but is seen on the*/
+            /*actual card in the list, not on the image that is pinned to*/
+            /*mouse when dragging. This changes the card to style of drop*/
+            /*drop target. This works because cards are actualy switched*/
+            /*before dragging ends and you are allways dropping the card on*/
+            /*itself, which at the time seems like drop target.*/
             &.is-dragging {
                 margin: 10px;
                 padding: 10px;
@@ -79,7 +85,6 @@ body {
                     visibility: hidden;
                 }
             }
-
 
             input {
                 margin-right: 8px;
