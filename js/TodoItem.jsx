@@ -20,14 +20,12 @@ let TodoItem = React.createClass({
         todo: Todo.PropType.isRequired,
         onTodoChange: Types.func.isRequired,
         onTodoMove: Types.func.isRequired,
-        index: Types.number.isRequired,
         className: Types.string
     },
 
     render () {
         let {
             todo,
-            index,
             connectDragSource,
             connectDragPreview,
             connectDropTarget,
@@ -44,7 +42,7 @@ let TodoItem = React.createClass({
                 <input
                     type='checkbox'
                     checked={todo.completed}
-                    onChange={() => this.props.onTodoChange(todo, index)}
+                    onChange={() => this.props.onTodoChange(todo)}
                 />
                 <div className='text'>{todo.text}</div>
                 {connectDragSource(

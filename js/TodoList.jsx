@@ -26,7 +26,6 @@ let TodoList = React.createClass({
                         odd: (index + 1) % 2
                     })}
                     todo={todo}
-                    index={index}
                     onTodoMove={this.props.onTodoMove}
                     onTodoChange={this.props.onTodoChange}
                 />

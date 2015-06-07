@@ -80,9 +80,9 @@ module.exports = React.createClass({
      * toggle.
      *
      * @arg {Todo} todo
-     * @arg {number} index - index of the todo in the list
      */
-    onTodoChange (todo, index) {
+    onTodoChange (todo) {
+        let index = this.state.todos.indexOf(todo);
         let newTodo = todo.completed ? todo.uncomplete() : todo.complete();
         let newTodos = _.clone(this.state.todos);
         newTodos[index] = newTodo;
