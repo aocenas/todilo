@@ -9,9 +9,13 @@ const Types = React.PropTypes;
 let TodoItem = React.createClass({
     displayName: 'TodoItem',
     propTypes: {
+        // props injected by DragSource
         connectDragSource: Types.func.isRequired,
-        connectDropTarget: Types.func.isRequired,
+        connectDragPreview: Types.func.isRequired,
         isDragging: Types.bool.isRequired,
+
+        // props injected by DropTarget
+        connectDropTarget: Types.func.isRequired,
 
         todo: Todo.PropType.isRequired,
         onTodoChange: Types.func.isRequired,
@@ -21,13 +25,16 @@ let TodoItem = React.createClass({
     },
 
     render () {
-        let {todo,
+        let {
+            todo,
             index,
             connectDragSource,
+            connectDragPreview,
             connectDropTarget,
-            isDragging} = this.props;
+            isDragging
+        } = this.props;
 
-        return connectDragSource(connectDropTarget(
+        return connectDragPreview(connectDropTarget(
             <li
                 className={cx(this.props.className, {
                     completed: todo.completed,
@@ -40,7 +47,9 @@ let TodoItem = React.createClass({
                     onChange={() => this.props.onTodoChange(todo, index)}
                 />
                 <div className='text'>{todo.text}</div>
-                <i className='fa fa-bars'></i>
+                {connectDragSource(
+                    <i className='fa fa-bars'></i>
+                )}
             </li>
         ));
     }
@@ -69,6 +78,7 @@ let dragSource = DragSource(
     cardSource,
     (connect, monitor) => ({
         connectDragSource: connect.dragSource(),
+        connectDragPreview: connect.dragPreview(),
         isDragging: monitor.isDragging()
     })
 );
