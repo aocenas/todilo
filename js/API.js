@@ -16,9 +16,9 @@ module.exports = {
     },
 
 
-    updateTodo (todo, index) {
+    updateTodo (todo) {
         return Request
-            .put(`${API_URL}/todos/${index}`)
+            .put(`${API_URL}/todos/${todo.id}`)
             .json(todo);
     },
 
@@ -27,9 +27,9 @@ module.exports = {
         return Request.put(`${API_URL}/todos/mark`);
     },
 
-    moveTodo (index, newIndex) {
+    moveTodo (todo, newIndex) {
         return Request
-            .put(`${API_URL}/todos/${index}/move`)
+            .put(`${API_URL}/todos/${todo.id}/move`)
             .json({newIndex});
     }
 };

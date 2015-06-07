@@ -85,7 +85,7 @@ module.exports = React.createClass({
         let newTodos = _.clone(this.state.todos);
         newTodos[index] = newTodo;
         this.setState({todos: newTodos});
-        API.updateTodo(newTodo, index);
+        API.updateTodo(newTodo);
     },
 
 
@@ -129,6 +129,6 @@ module.exports = React.createClass({
         // insert todo in correct place
         newTodos.splice(moveToIndex, 0, todo);
         this.setState({todos: newTodos});
-        API.moveTodo(index, moveToIndex);
+        API.moveTodo(todo, moveToIndex);
     }
 });
