@@ -1,34 +1,35 @@
 const cx = require('classnames');
 const React = require('react');
+const { DragDropContext } = require('react-dnd');
+const HTML5Backend = require('react-dnd/modules/backends/HTML5');
 
 const Todo = require('./Todo');
+const TodoItem = require('./TodoItem.jsx');
 
 const Types = React.PropTypes;
 
-module.exports = React.createClass({
-    displayName: 'TodiloApp',
+let TodoList = React.createClass({
+    displayName: 'TodoList',
     propTypes: {
         todos: Types.arrayOf(Todo.PropType).isRequired,
-        onTodoChange: Types.func.isRequired
+        onTodoChange: Types.func.isRequired,
+        onTodoMove: Types.func.isRequired
     },
 
     render () {
+
         let list = this.props.todos.map((todo, index) => {
             return (
-                <li
-                    key={index}
+                <TodoItem
+                    key={todo.id}
                     className={cx({
-                        odd: (index + 1) % 2,
-                        completed: todo.completed
+                        odd: (index + 1) % 2
                     })}
-                >
-                    <input
-                        type='checkbox'
-                        checked={todo.completed}
-                        onChange={() => this.props.onTodoChange(todo, index)}
-                    />
-                    {todo.text}
-                </li>
+                    todo={todo}
+                    index={index}
+                    onTodoMove={this.props.onTodoMove}
+                    onTodoChange={this.props.onTodoChange}
+                />
             );
         });
 
@@ -38,4 +39,9 @@ module.exports = React.createClass({
             </ul>
         );
     }
+
 });
+
+let dropContext = DragDropContext(HTML5Backend);
+module.exports = dropContext(TodoList);
+

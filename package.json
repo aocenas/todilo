@@ -4,9 +4,11 @@
   "description": "todo app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "mkdir static/js; npm run-script js-build; npm run-script css-build",
+    "test": "python server_tests.py",
     "js-build": "./node_modules/.bin/browserify js/app.jsx -t babelify -o static/js/app.js --debug",
     "js-watch": "./node_modules/.bin/watchify js/app.jsx -t babelify -o static/js/app.js --debug -v",
+    "css-build": "sass styles/todilo.scss:static/css/todilo.css",
     "css-watch": "sass --watch styles/todilo.scss:static/css/todilo.css"
   },
   "author": "andrej ocenas",
@@ -15,6 +17,7 @@
     "classnames": "^2.1.2",
     "lodash": "^3.9.3",
     "react": "^0.13.3",
+    "react-dnd": "^1.1.2",
     "request-promise": "^0.4.2"
   },
   "devDependencies": {

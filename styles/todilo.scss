@@ -1,5 +1,6 @@
 body {
     background-color: #f3f2f2;
+    padding-top: 20px;
 }
 
 
@@ -39,9 +40,21 @@ body {
             padding: 8px 0;
             color: #565656;
             /*1px white on top, top half lighter grey, bottom half darker gray*/
-            background-image: linear-gradient(to bottom, white, #e6e5e4 1px, #e6e5e4 50%, #cecdcb 50%, #cecdcb);
+            background-image: linear-gradient(to bottom, white, #e6e5e4 1px, #e6e5e4 40%, #cecdcb 60%, #cecdcb);
+
+            &:active {
+                background-image: linear-gradient(to bottom, white, #cecdcb 1px, #cecdcb 40%, #e6e5e4 60%, #e6e5e4);
+            }
         }
     }
+
+
+    .empty-state {
+        padding: 20px;
+        text-align: center;
+        min-height: 270px;
+    }
+
 
     ul {
         margin: 0;
@@ -50,18 +63,48 @@ body {
         min-height: 270px;
 
         li {
+            display: flex;
             padding: 20px;
+            align-items: center;
+            /*if not set its transparent and looks weird when dragging*/
+            background-color: white;
+
             &.odd {
                 background-color: #F2F5F8;
             }
 
-            &.completed {
+            &.completed .text {
                 text-decoration: line-through;
                 color: #878787;
             }
 
+            /*this is style of the card when dragging, but is seen on the*/
+            /*actual card in the list, not on the image that is pinned to*/
+            /*mouse when dragging. This changes the card to style of drop*/
+            /*drop target. This works because cards are actualy switched*/
+            /*before dragging ends and you are allways dropping the card on*/
+            /*itself, which at the time seems like drop target.*/
+            &.is-dragging {
+                margin: 8px;
+                padding: 10px;
+                border: 2px dashed #ddd;
+
+                input, button, div {
+                    visibility: hidden;
+                }
+            }
+
             input {
                 margin-right: 8px;
+            }
+
+            .text {
+                flex: 1;
+            }
+
+            i {
+                color: #878787;
+                cursor: row-resize;
             }
         }
     }

@@ -1,9 +1,8 @@
 const _ = require('lodash');
 const React = require('react');
-const Request = require('request-promise');
 const Todo = require('./Todo');
 const TodoList = require('./TodoList.jsx');
-const {API_URL} = require('./constants');
+const API = require('./API');
 
 
 module.exports = React.createClass({
@@ -18,8 +17,8 @@ module.exports = React.createClass({
 
 
     componentDidMount () {
-        Request(`${API_URL}/todos`)
-            .then(body => this.setState({todos: JSON.parse(body).todos}));
+        API.getAllTodos()
+            .then(todos => this.setState({todos: todos.map(Todo)}));
     },
 
 
@@ -49,17 +48,20 @@ module.exports = React.createClass({
                     <TodoList
                         todos={this.state.todos}
                         onTodoChange={this.onTodoChange}
+                        onTodoMove={this.onTodoMove}
                     /> :
 
-                    <div>
-                        You sure there is nothing you have to do?
+                    <div className='empty-state'>
+                        You sure there is nothing you have to do? Add some todos.
                     </div>
                 }
                 <footer>
                     <div className='items-left'>
-                        {uncompletedCount ?
-                            uncompletedCount + ' items left' :
-                            'all completed, yay!'
+                        {this.state.todos.length ?
+                            (uncompletedCount ?
+                                uncompletedCount + ' items left' :
+                                'all completed, yay!'
+                            ) : 'no todos just yet'
                         }
                     </div>
                     {uncompletedCount ?
@@ -85,12 +87,14 @@ module.exports = React.createClass({
         let newTodos = _.clone(this.state.todos);
         newTodos[index] = newTodo;
         this.setState({todos: newTodos});
+        API.updateTodo(newTodo);
     },
 
 
     markAllCompleted () {
         let newTodos = this.state.todos.map(todo => todo.complete());
         this.setState({todos: newTodos});
+        API.markAllCompleted();
     },
 
 
@@ -100,11 +104,33 @@ module.exports = React.createClass({
         event.preventDefault();
         if (this.state.newTodoText) {
             let newTodos = _.clone(this.state.todos);
-            newTodos.push(Todo(this.state.newTodoText));
+            let newTodo = Todo({
+                text: this.state.newTodoText,
+                id: newTodos.length
+            });
+            newTodos.push(newTodo);
+            // optimistic update
             this.setState({
                 todos: newTodos,
                 newTodoText: null
             });
+            API.addTodo(newTodo).catch(() => {
+                // TODO: rollback
+            });
         }
+    },
+
+
+    onTodoMove (todo, moveToTodo) {
+        let {todos} = this.state;
+        let index = todos.indexOf(todo);
+        let moveToIndex = todos.indexOf(moveToTodo);
+
+        // shallow copy, without the todo we are moving
+        let newTodos = todos.slice(0, index).concat(todos.slice(index + 1));
+        // insert todo in correct place
+        newTodos.splice(moveToIndex, 0, todo);
+        this.setState({todos: newTodos});
+        API.moveTodo(todo, moveToIndex);
     }
 });
