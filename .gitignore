@@ -1,2 +1,8 @@
 node_modules
 .sass-cache
+*.pyc
+
+#these files are build with sass and browserify
+static/css/*.css
+static/css/*.css.map
+static/js
