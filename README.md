@@ -15,6 +15,7 @@ Tested on node v0.12, python 2.7.6 and chrome 43.
 #run:
 
 `python server.py`
+
 flask server should run on default http://127.0.0.1:5000/
 
 
@@ -23,6 +24,8 @@ flask server should run on default http://127.0.0.1:5000/
 `npm run-script js-test` for some rudimentary Jest tests, but because of
 https://github.com/facebook/jest/issues/243 they do not work on node 0.12
 (they can be run on 0.10)
+
 `npm run-script python-test` for some python API tests
+
 `npm test` runs both
 
