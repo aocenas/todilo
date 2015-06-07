@@ -4,6 +4,7 @@
   "description": "todo app",
   "main": "index.js",
   "scripts": {
+    "postinstall": "mkdir static/js; npm run-script js-build; npm run-script css-build",
     "test": "python server_tests.py",
     "js-build": "./node_modules/.bin/browserify js/app.jsx -t babelify -o static/js/app.js --debug",
     "js-watch": "./node_modules/.bin/watchify js/app.jsx -t babelify -o static/js/app.js --debug -v",
