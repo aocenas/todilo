@@ -43,12 +43,7 @@ let TodoItem = React.createClass({
                     onChange={() => this.props.onTodoChange(todo, index)}
                 />
                 <div className='text'>{todo.text}</div>
-                <button onClick={move(-1)}>
-                    up
-                </button>
-                <button onClick={move(+1)}>
-                    down
-                </button>
+                <i className='fa fa-bars'></i>
             </li>
         ));
     }

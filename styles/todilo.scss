@@ -58,12 +58,14 @@ body {
             display: flex;
             padding: 20px;
             align-items: center;
+            /*if not set its transparent and looks weird when dragging*/
+            background-color: white;
 
             &.odd {
                 background-color: #F2F5F8;
             }
 
-            &.completed {
+            &.completed .text {
                 text-decoration: line-through;
                 color: #878787;
             }
@@ -85,6 +87,10 @@ body {
 
             .text {
                 flex: 1;
+            }
+
+            i {
+                color: #878787;
             }
         }
     }
