@@ -51,15 +51,17 @@ module.exports = React.createClass({
                         onTodoMove={this.onTodoMove}
                     /> :
 
-                    <div>
-                        You sure there is nothing you have to do?
+                    <div className='empty-state'>
+                        You sure there is nothing you have to do? Add some todos.
                     </div>
                 }
                 <footer>
                     <div className='items-left'>
-                        {uncompletedCount ?
-                            uncompletedCount + ' items left' :
-                            'all completed, yay!'
+                        {this.state.todos.length ?
+                            (uncompletedCount ?
+                                uncompletedCount + ' items left' :
+                                'all completed, yay!'
+                            ) : 'no todos just yet'
                         }
                     </div>
                     {uncompletedCount ?
