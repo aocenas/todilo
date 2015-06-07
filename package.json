@@ -41,7 +41,7 @@
       "es6"
     ],
     "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react"
+      "<rootDir>/node_modules"
     ]
   }
 }
