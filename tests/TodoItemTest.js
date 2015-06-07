@@ -1,15 +1,10 @@
 jest.dontMock('../js/TodoItem.jsx');
 jest.dontMock('../js/Todo');
 
-//
-// Not working at the moment, some problem with the react-dnd decorators.
-// Probably need to create root component with DragDropContext(HTML5Backend),
-// in the same way as TodoList or directly test it wrapped in TodoList
-//
-describe('TodoItem', function() {
-    it('changes the text after click', function() {
+describe('TodoList', function() {
+    it('renders correct text and input status from todo', function() {
         var React = require('react/addons');
-        var TodoItem = require('../js/TodoItem.jsx').DecoratedComponent;
+        var TodoList = require('../js/TodoList.jsx');
         var Todo = require('../js/Todo');
         var TestUtils = React.addons.TestUtils;
 
@@ -17,21 +12,20 @@ describe('TodoItem', function() {
         var identity = function (el) { return el; };
 
         // Render a checkbox with label in the document
-        var todoItem = TestUtils.renderIntoDocument(
-            <TodoItem
-                todo={todo}
+        var todoList = TestUtils.renderIntoDocument(
+            <TodoList
+                todos={[todo]}
                 onTodoChange={function () {}}
                 onTodoMove={function () {}}
-                index={0}
-                isDragging={false}
-                connectDragSource={identity}
-                connectDragPreview={identity}
-                connectDropTarget={identity}
             />
         );
 
         var input = TestUtils
-            .findRenderedDOMComponentWithTag(todoItem, 'input');
+            .findRenderedDOMComponentWithTag(todoList, 'input');
         expect(input.getDOMNode().checked).toEqual(false);
+
+        var text = TestUtils
+            .findRenderedDOMComponentWithClass(todoList, 'text');
+        expect(text.getDOMNode().textContent).toEqual('test todo');
     });
 });
