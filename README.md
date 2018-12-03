@@ -5,21 +5,21 @@ TODO, mark as done, reorder by drag and drop.
 Tested on node v0.12, python 2.7.6 and chrome 43.
 
 
-#installation:
+# installation:
 
 1. clone repo
 2. best with virtualenv: `pip install -r requirements.txt`
 3. install Sass: `gem install sass`
 4. `npm install`
 
-#run:
+# run:
 
 `python server.py`
 
 flask server should run on default http://127.0.0.1:5000/
 
 
-#test:
+# test:
 
 `npm run-script js-test` for some rudimentary Jest tests, but because of
 https://github.com/facebook/jest/issues/243 they do not work on node 0.12
